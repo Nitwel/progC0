@@ -43,7 +43,6 @@
             :mode="mode"
         ></coder>
         <compiler :displayStates="displayStates" :error="error"></compiler>
-        {{nextCompilers}}
     </template>
     <!-- <instruction-counter v-model="counter"></instruction-counter> -->
 </template>

@@ -46,6 +46,9 @@ int main() {
   const output: Ref<number[]> = ref([]);
   const stack: Ref<number[]> = ref([]);
 
+  let waitIndex = 0
+  let maxWaitSpeed = 49
+
   async function run() {
     paused.value = running.value && !paused.value
     if(paused.value === false && running.value === false && finished.value === true) {
@@ -60,7 +63,12 @@ int main() {
         input,
         output
       );
-      await new Promise((resolve) => setTimeout(resolve, 1000 / speed.value));
+      waitIndex++;
+      console.log(waitIndex % Math.pow(speed.value - maxWaitSpeed, 2))
+      if(speed.value <= maxWaitSpeed || waitIndex % (speed.value - maxWaitSpeed) === 0) {
+        await new Promise((resolve) => setTimeout(resolve, Math.ceil(1000 / speed.value)));
+        waitIndex = 0
+      }
     }
 
     if(paused.value === false) {

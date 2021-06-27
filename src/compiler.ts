@@ -69,7 +69,7 @@ export function compiler(code: Ref<string>, speed: Ref<number>) {
         if(running.value === false) {
             codeWhenRunning = newCode.replaceAll("\n", " ").trim()
             let result = program.run(codeWhenRunning);
-            console.log(JSON.stringify(result, null, 2))
+            //console.log(JSON.stringify(result, null, 2))
             if(result.isError === false) nextCompilers.value = [trans(result.result)]
             if(result.isError) {
                 console.error(result.error)
